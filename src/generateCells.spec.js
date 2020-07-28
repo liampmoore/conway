@@ -159,3 +159,49 @@ test("works for a rectangular grid of arbitrary size", () => {
     y++;
   }
 });
+
+test("runs in a time that would fit well within 16 ms per frame", () => {
+  const grid = [
+    [false, false, false, false, false, false, false],
+    [false, false, false, false, false, false, false],
+    [false, false, true, false, false, false, false],
+    [false, false, true, false, false, false, false],
+    [false, true, false, true, false, false, false],
+    [false, false, false, false, false, false, false],
+    [false, false, false, false, false, false, false],
+    [false, false, false, false, false, false, false],
+    [false, false, true, false, false, false, false],
+    [false, false, true, false, false, false, false],
+    [false, true, false, true, false, false, false],
+    [false, false, false, false, false, false, false],
+  ];
+  const randomGridOfSize = (size) => {
+    let randomGrid = new Array(size);
+    for (let y = 0; y < size; y++) {
+      randomGrid[y] = new Array(size);
+      for (let x = 0; x < size; x++) {
+        randomGrid[y][x] = Math.random() < 0.5;
+      }
+    }
+    return randomGrid;
+  };
+
+  const timer = (timedFunction, input, description) => {
+    const time = process.hrtime();
+
+    const output = timedFunction(input);
+
+    const diff = process.hrtime(time);
+    console.log(
+      `Benchmark took ${
+        (diff[0] * 1e9 + diff[1]) / 1000000
+      } milliseconds for ${description}`
+    );
+  };
+
+  const smallRandomGrid = randomGridOfSize(12);
+  const bigRandomGrid = randomGridOfSize(120);
+  timer(generateCells, grid, "a 12 x 12 grid of the same booleans each time");
+  timer(generateCells, smallRandomGrid, "a 12 x 12 grid of random booleans");
+  timer(generateCells, bigRandomGrid, "a 120 x 120 grid of random booleans");
+});
