@@ -7,13 +7,14 @@ function generateCells(input) {
   //   Make a copy of the input.
   const output = input.map((row) => row.map((cell) => cell));
 
+  // Use two for loops to get the x y coordinates
   let y = 0;
   while (y < input.length) {
     let x = 0;
     while (x < input[0].length) {
       // Going clockwise around the cell count up neighbors who are alive.
       let alive = 0;
-      // Only check these neighbors if you aren't on top edge
+      // Only check these neighbors if you aren't on top edge.
       if (y !== 0) {
         if (input[y - 1][x]) {
           alive++;
@@ -25,7 +26,7 @@ function generateCells(input) {
           alive++;
         }
       }
-      // Only check these neighbors if you aren't on the bottom edge
+      // Only check these neighbors if you aren't on the bottom edge.
       if (y < input.length - 1) {
         if (input[y + 1][x]) {
           alive++;
@@ -43,8 +44,10 @@ function generateCells(input) {
       if (input[y][x - 1]) {
         alive++;
       }
+      // If you don't have two or three neighbors you won't be alive on the next round.
       if (!(alive == 2 || alive == 3)) {
         output[y][x] = false;
+        // If you have three neighbors you will be alive the next round.
       } else if (alive == 3) {
         output[y][x] = true;
       }
@@ -54,19 +57,5 @@ function generateCells(input) {
   }
   return output;
 }
-
-export const timeGeneration = () => {
-  const NS_PER_SEC = 1e9;
-  const time = process.hrtime();
-  // [ 1800216, 25 ]
-
-  setTimeout(() => {
-    const diff = process.hrtime(time);
-    // [ 1, 552 ]
-
-    console.log(`Benchmark took ${diff[0] * NS_PER_SEC + diff[1]} nanoseconds`);
-    // benchmark took 1000000552 nanoseconds
-  }, 1000);
-};
 
 export default generateCells;
