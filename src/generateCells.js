@@ -1,61 +1,32 @@
-function generateCells(input) {
+function generateCells(currentMap) {
   if (!input[0].length) {
     console.log(typeof input[0]);
     throw new Error("inputGrid is not properly formatted.");
   }
 
-  //   Make a copy of the input.
-  const output = input.map((row) => row.map((cell) => cell));
+  // We create two maps. One map will be the map of cells that will be alive for the next frame.
+  // The other map is a map of cells that will NOT be alive for the next frame.
+  // By saving cells that won't be in the next frame in the context of this function,
+  // we won't have to run the entire check function on them if we run into them again.
+  nextMap = new Map();
+  deadMap = new Map();
 
-  // Use two for loops to get the x y coordinates
-  let y = 0;
-  while (y < input.length) {
-    let x = 0;
-    while (x < input[0].length) {
-      // Going clockwise around the cell count up neighbors who are alive.
-      let alive = 0;
-      // Only check these neighbors if you aren't on top edge.
-      if (y !== 0) {
-        if (input[y - 1][x]) {
-          alive++;
-        }
-        if (input[y - 1][x + 1]) {
-          alive++;
-        }
-        if (input[y - 1][x - 1]) {
-          alive++;
-        }
-      }
-      // Only check these neighbors if you aren't on the bottom edge.
-      if (y < input.length - 1) {
-        if (input[y + 1][x]) {
-          alive++;
-        }
-        if (input[y + 1][x + 1]) {
-          alive++;
-        }
-        if (input[y + 1][x - 1]) {
-          alive++;
-        }
-      }
-      if (input[y][x + 1]) {
-        alive++;
-      }
-      if (input[y][x - 1]) {
-        alive++;
-      }
-      // If you don't have two or three neighbors you won't be alive on the next round.
-      if (!(alive == 2 || alive == 3)) {
-        output[y][x] = false;
-        // If you have three neighbors you will be alive the next round.
-      } else if (alive == 3) {
-        output[y][x] = true;
-      }
-      x++;
-    }
-    y++;
+  // Iterate through the old map, this will loop through every alive cell in the current frame.
+  for (let [key, value] of currentMap) {
+    // Check neighbors
+    // For each one check if it's already in the nextMap, and if it's in the deadMap
+    // If it isn't in either of those run the checkCell helper function on it
+    // Top left
+    // Top
+    // Top right
+    // Left
+    // Right
+    // Bottom left
+    // Bottom
+    // Bottom right
   }
-  return output;
+
+  return nextMap;
 }
 
 export default generateCells;
