@@ -160,48 +160,37 @@ test("works for a rectangular grid of arbitrary size", () => {
   }
 });
 
-test("runs in a time that would fit well within 16 ms per frame", () => {
-  const grid = [
-    [false, false, false, false, false, false, false],
-    [false, false, false, false, false, false, false],
-    [false, false, true, false, false, false, false],
-    [false, false, true, false, false, false, false],
-    [false, true, false, true, false, false, false],
-    [false, false, false, false, false, false, false],
-    [false, false, false, false, false, false, false],
-    [false, false, false, false, false, false, false],
-    [false, false, true, false, false, false, false],
-    [false, false, true, false, false, false, false],
-    [false, true, false, true, false, false, false],
-    [false, false, false, false, false, false, false],
-  ];
-  const randomGridOfSize = (size) => {
-    let randomGrid = new Array(size);
-    for (let y = 0; y < size; y++) {
-      randomGrid[y] = new Array(size);
-      for (let x = 0; x < size; x++) {
-        randomGrid[y][x] = Math.random() < 0.5;
-      }
+const randomGridOfSize = (size) => {
+  let randomGrid = new Array(size);
+  for (let y = 0; y < size; y++) {
+    randomGrid[y] = new Array(size);
+    for (let x = 0; x < size; x++) {
+      randomGrid[y][x] = Math.random() < 0.5;
     }
-    return randomGrid;
-  };
+  }
+  return randomGrid;
+};
 
-  const timer = (timedFunction, input, description) => {
-    const time = process.hrtime();
+const benchmarkTimer = (timedFunction, input) => {
+  const time = process.hrtime();
+  timedFunction(input);
+  const diff = process.hrtime(time);
+  const milliseconds = (diff[0] * 1e9 + diff[1]) / 1000000;
+  return milliseconds;
+};
+const smallRandomGrid = randomGridOfSize(12);
+test("runs under 1ms for a  12 x 12 grid", () => {
+  const milliseconds = benchmarkTimer(generateCells, smallRandomGrid);
+  expect(milliseconds).toBeLessThan(1);
+});
+const mediumRandomGrid = randomGridOfSize(48);
+test("runs under 1ms for a 48 x 48 grid", () => {
+  const milliseconds = benchmarkTimer(generateCells, mediumRandomGrid);
+  expect(milliseconds).toBeLessThan(1);
+});
 
-    const output = timedFunction(input);
-
-    const diff = process.hrtime(time);
-    console.log(
-      `Benchmark took ${
-        (diff[0] * 1e9 + diff[1]) / 1000000
-      } milliseconds for ${description}`
-    );
-  };
-
-  const smallRandomGrid = randomGridOfSize(12);
-  const bigRandomGrid = randomGridOfSize(120);
-  timer(generateCells, grid, "a 12 x 12 grid of the same booleans each time");
-  timer(generateCells, smallRandomGrid, "a 12 x 12 grid of random booleans");
-  timer(generateCells, bigRandomGrid, "a 120 x 120 grid of random booleans");
+const bigRandomGrid = randomGridOfSize(100);
+test("runs under 1ms for a 100 x 100 grid", () => {
+  const milliseconds = benchmarkTimer(generateCells, bigRandomGrid);
+  expect(milliseconds).toBeLessThan(1);
 });
