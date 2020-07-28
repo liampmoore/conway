@@ -43,9 +43,9 @@ function generateCells(input) {
       if (input[y][x - 1]) {
         alive++;
       }
-      if (input[y][x] === true && !(alive == 2 || alive == 3)) {
+      if (!(alive == 2 || alive == 3)) {
         output[y][x] = false;
-      } else if (input[y][x] === false && alive == 3) {
+      } else if (alive == 3) {
         output[y][x] = true;
       }
       x++;
