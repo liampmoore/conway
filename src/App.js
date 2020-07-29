@@ -25,7 +25,7 @@ function App() {
       <Viewport>
         <canvas
           ref={canvasRef}
-          height={(window.innerHeight * 8) / 9}
+          height={window.innerHeight * 0.875}
           width={window.innerWidth}
           position="absolute"
           bottom="0"
