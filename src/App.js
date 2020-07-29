@@ -1,15 +1,10 @@
-import React from "react";
-import styled from "styled-components";
+import React, { useState } from "react";
+import InterfacePanel from "./components/InterfacePanel.js";
 
-const Wrapper = styled.div`
-  max-width: 600px;
-  margin: 0 auto;
-  height: 100vh;
-  background-color: red;
-`;
-
+// Notes: The interface panel uses a total of 20vh of the screen
 function App() {
-  return <Wrapper></Wrapper>;
+  const [isPlaying, setIsPlaying] = useState(false);
+  return <InterfacePanel isPlaying={isPlaying} setIsPlaying={setIsPlaying} />;
 }
 
 export default App;
