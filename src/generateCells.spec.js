@@ -15,17 +15,17 @@ test("can generate a map from an array of arrays", () => {
 
   const output = generateFirstMapFromGrid(input);
 
-  expect(output.get("23").y).toBe(2);
-  expect(output.get("23").x).toBe(3);
-  expect(output.get("32").y).toBe(3);
-  expect(output.get("32").x).toBe(2);
-  expect(output.get("41").y).toBe(4);
-  expect(output.get("41").x).toBe(1);
+  expect(output.get(23).y).toBe(2);
+  expect(output.get(23).x).toBe(3);
+  expect(output.get(32).y).toBe(3);
+  expect(output.get(32).x).toBe(2);
+  expect(output.get(41).y).toBe(4);
+  expect(output.get(41).x).toBe(1);
 });
 
 test("can generate an array of arrays from a map", () => {
   const input = new Map();
-  input.set("23", { y: 2, x: 3 });
+  input.set(23, { y: 2, x: 3 });
 
   const output = generateGridFromMap(input, 6, 6);
 
@@ -73,9 +73,9 @@ test("when a cell is true without two or three true neighbors it should become f
 
   const firstMap = generateFirstMapFromGrid(input);
 
-  const nextMap = generateCells(firstMap);
+  const nextMap = generateCells(firstMap, 6, 6);
 
-  const output = generateGridFromMap(nextMap, input[0].length, input.length);
+  const output = generateGridFromMap(nextMap, 6, 6);
 
   let y = 0;
   while (y < input.length) {
@@ -109,9 +109,9 @@ test("when a cell is true with two true neighbors it should remain true", () => 
 
   const firstMap = generateFirstMapFromGrid(input);
 
-  const nextMap = generateCells(firstMap);
+  const nextMap = generateCells(firstMap, 6, 6);
 
-  const output = generateGridFromMap(nextMap, input[0].length, input.length);
+  const output = generateGridFromMap(nextMap, 6, 6);
 
   let y = 0;
   while (y < input.length) {
@@ -145,9 +145,9 @@ test("when a cell is true with three true neighbors it should remain true", () =
 
   const firstMap = generateFirstMapFromGrid(input);
 
-  const nextMap = generateCells(firstMap);
+  const nextMap = generateCells(firstMap, 6, 6);
 
-  const output = generateGridFromMap(nextMap, input[0].length, input.length);
+  const output = generateGridFromMap(nextMap, 6, 6);
 
   let y = 0;
   while (y < input.length) {
@@ -181,9 +181,9 @@ test("when a cell is false and has three true neighbors it should become true", 
 
   const firstMap = generateFirstMapFromGrid(input);
 
-  const nextMap = generateCells(firstMap);
+  const nextMap = generateCells(firstMap, 6, 6);
 
-  const output = generateGridFromMap(nextMap, input[0].length, input.length);
+  const output = generateGridFromMap(nextMap, 6, 6);
 
   let y = 0;
   while (y < input.length) {
@@ -217,14 +217,14 @@ test("works for a rectangular grid of arbitrary size", () => {
 
   const firstMap = generateFirstMapFromGrid(input);
 
-  const nextMap = generateCells(firstMap);
+  const nextMap = generateCells(firstMap, 7, 6);
 
-  const output = generateGridFromMap(nextMap, input[0].length, input.length);
+  const output = generateGridFromMap(nextMap, 7, 6);
 
   let y = 0;
-  while (y < input.length) {
+  while (y < 6) {
     let x = 0;
-    while (x < input.length) {
+    while (x < 7) {
       expect(output[y][x]).toBe(expectedOutput[y][x]);
       x++;
     }
@@ -251,18 +251,35 @@ const benchmarkTimer = (timedFunction, input) => {
   return milliseconds;
 };
 const smallRandomGrid = randomGridOfSize(12);
+const smallRandomMap = generateFirstMapFromGrid(smallRandomGrid);
 test("runs under 1ms for a  12 x 12 grid", () => {
-  const milliseconds = benchmarkTimer(generateCells, smallRandomGrid);
+  const milliseconds = benchmarkTimer(generateCells, smallRandomMap);
   expect(milliseconds).toBeLessThan(1);
 });
 const mediumRandomGrid = randomGridOfSize(48);
+const mediumRandomMap = generateFirstMapFromGrid(mediumRandomGrid);
 test("runs under 1ms for a 48 x 48 grid", () => {
-  const milliseconds = benchmarkTimer(generateCells, mediumRandomGrid);
+  const milliseconds = benchmarkTimer(generateCells, mediumRandomMap);
   expect(milliseconds).toBeLessThan(1);
 });
 
 const bigRandomGrid = randomGridOfSize(100);
-test("runs under 1ms for a 100 x 100 grid", () => {
-  const milliseconds = benchmarkTimer(generateCells, bigRandomGrid);
-  expect(milliseconds).toBeLessThan(1);
+const bigRandomMap = generateFirstMapFromGrid(bigRandomGrid);
+test("runs under 2ms for a 100 x 100 grid", () => {
+  const milliseconds = benchmarkTimer(generateCells, bigRandomMap);
+  expect(milliseconds).toBeLessThan(2);
+});
+
+const hugeRandomGrid = randomGridOfSize(400);
+const hugeRandomMap = generateFirstMapFromGrid(hugeRandomGrid);
+test("runs under 4ms for a 400 x 400 grid", () => {
+  const milliseconds = benchmarkTimer(generateCells, hugeRandomMap);
+  expect(milliseconds).toBeLessThan(4);
+});
+
+const giantRandomGrid = randomGridOfSize(1000);
+const giantRandomMap = generateFirstMapFromGrid(giantRandomGrid);
+test("runs under 10ms for a 1000 x 1000 grid", () => {
+  const milliseconds = benchmarkTimer(generateCells, giantRandomMap);
+  expect(milliseconds).toBeLessThan(10);
 });

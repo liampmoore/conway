@@ -1,5 +1,8 @@
 function checkCell(currentMap, y, ySize, x, xSize, nextMap, deadMap) {
-  const cellKey = String(y) + String(x);
+  const hashFunction = (y, x) => {
+    return y * 10 + x;
+  };
+  const cellKey = hashFunction(y, x);
   // Check if the current cell is in the nextMap already, if so return
   if (nextMap.has(cellKey)) {
     return;
@@ -14,17 +17,17 @@ function checkCell(currentMap, y, ySize, x, xSize, nextMap, deadMap) {
   if (y > 0) {
     if (x > 0) {
       // Top left
-      if (currentMap.has(String(y - 1) + String(x - 1))) {
+      if (currentMap.has(hashFunction(y - 1, x - 1))) {
         livingNeighbors++;
       }
     }
     // Top
-    if (currentMap.has(String(y - 1) + String(x))) {
+    if (currentMap.has(hashFunction(y - 1, x))) {
       livingNeighbors++;
     }
     if (x < xSize - 1) {
       // Top right
-      if (currentMap.has(String(y - 1) + String(x + 1))) {
+      if (currentMap.has(hashFunction(y - 1, x + 1))) {
         livingNeighbors++;
       }
     }
@@ -32,14 +35,14 @@ function checkCell(currentMap, y, ySize, x, xSize, nextMap, deadMap) {
   // Check the middle left neighbor if the cell isn't on the leftmost side of the screen
   if (x > 0) {
     // Left
-    if (currentMap.has(String(y) + String(x - 1))) {
+    if (currentMap.has(hashFunction(y, x - 1))) {
       livingNeighbors++;
     }
   }
   // Check the middle right neighbor if the cell isn't on the rightmost side of the screen
   if (x < xSize - 1) {
     // Right
-    if (currentMap.has(String(y) + String(x + 1))) {
+    if (currentMap.has(hashFunction(y, x + 1))) {
       livingNeighbors++;
     }
   }
@@ -47,27 +50,31 @@ function checkCell(currentMap, y, ySize, x, xSize, nextMap, deadMap) {
   if (y < ySize - 1) {
     if (x > 0) {
       // Bottom left
-      if (currentMap.has(String(y + 1) + String(x - 1))) {
+      if (currentMap.has(hashFunction(y + 1, x - 1))) {
         livingNeighbors++;
       }
     }
     // Bottom
-    if (currentMap.has(String(y + 1) + String(x))) {
+    if (currentMap.has(hashFunction(y + 1, x))) {
       livingNeighbors++;
     }
     if (x < xSize - 1) {
       // Bottom right
-      if (currentMap.has(String(y + 1) + String(x + 1))) {
+      if (currentMap.has(hashFunction(y + 1, x + 1))) {
         livingNeighbors++;
       }
     }
     // If it doesn't have two or three living neighbors in the current frame set it to the deadMap for the next frame
-    if (livingNeighbors !== (2 || 3)) {
-      deadMap.set(cellKey, { y: y, x: x });
-    }
-    // If it has three living neighbors in the current frame set it to nextMap, alive for the next frame
-    else if (livingNeighbors === 3) {
+    if (livingNeighbors === 3) {
       nextMap.set(cellKey, { y: y, x: x });
+    }
+    // If it is alive in the current map and has two living neighbors it will stay alive in the next map.
+    else if (livingNeighbors === 2 && currentMap.has(cellKey)) {
+      nextMap.set(cellKey, { y: y, x: x });
+    }
+    // Otherwise the cell will die.
+    else {
+      deadMap.set(cellKey, { y: y, x: x });
     }
   }
 }
@@ -155,7 +162,6 @@ function generateCells(currentMap, xSize, ySize) {
       }
     }
   }
-
   return nextMap;
 }
 
@@ -164,7 +170,7 @@ export function generateFirstMapFromGrid(grid) {
   for (let y = 0; y < grid.length; y++) {
     for (let x = 0; x < grid[0].length; x++) {
       if (grid[y][x]) {
-        firstMap.set(String(y) + String(x), { y: y, x: x });
+        firstMap.set(y * 10 + x, { y: y, x: x });
       }
     }
   }
