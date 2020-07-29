@@ -1,4 +1,56 @@
-import generateCells from "./generateCells";
+import generateCells, {
+  generateFirstMapFromGrid,
+  generateGridFromMap,
+} from "./generateCells";
+
+test("can generate a map from an array of arrays", () => {
+  const input = [
+    [false, false, false, false, false, false],
+    [false, false, false, false, false, false],
+    [false, false, false, true, false, false],
+    [false, false, true, false, false, false],
+    [false, true, false, false, false, false],
+    [false, false, false, false, false, false],
+  ];
+
+  const output = generateFirstMapFromGrid(input);
+
+  expect(output.get("23").y).toBe(2);
+  expect(output.get("23").x).toBe(3);
+  expect(output.get("32").y).toBe(3);
+  expect(output.get("32").x).toBe(2);
+  expect(output.get("41").y).toBe(4);
+  expect(output.get("41").x).toBe(1);
+});
+
+test("can generate an array of arrays from a map", () => {
+  const input = new Map();
+  input.set("23", { y: 2, x: 3 });
+
+  const output = generateGridFromMap(input, 6, 6);
+
+  const expectedOutput = [
+    [false, false, false, false, false, false],
+    [false, false, false, false, false, false],
+    [false, false, false, false, false, false],
+    [false, false, false, false, false, false],
+    [false, false, false, false, false, false],
+    [false, false, false, false, false, false],
+  ];
+
+  expectedOutput[2][3] = true;
+
+  let y = 0;
+  while (y < 6) {
+    let x = 0;
+    while (x < 6) {
+      expect(output[y][x]).toBe(expectedOutput[y][x]);
+
+      x++;
+    }
+    y++;
+  }
+});
 
 test("when a cell is true without two or three true neighbors it should become false", () => {
   const input = [
@@ -19,7 +71,11 @@ test("when a cell is true without two or three true neighbors it should become f
     [false, false, false, false, false, false],
   ];
 
-  const output = generateCells(input);
+  const firstMap = generateFirstMapFromGrid(input);
+
+  const nextMap = generateCells(firstMap);
+
+  const output = generateGridFromMap(nextMap, input[0].length, input.length);
 
   let y = 0;
   while (y < input.length) {
@@ -51,7 +107,11 @@ test("when a cell is true with two true neighbors it should remain true", () => 
     [false, false, false, false, false, false],
   ];
 
-  const output = generateCells(input);
+  const firstMap = generateFirstMapFromGrid(input);
+
+  const nextMap = generateCells(firstMap);
+
+  const output = generateGridFromMap(nextMap, input[0].length, input.length);
 
   let y = 0;
   while (y < input.length) {
@@ -83,7 +143,11 @@ test("when a cell is true with three true neighbors it should remain true", () =
     [false, false, false, false, false, false],
   ];
 
-  const output = generateCells(input);
+  const firstMap = generateFirstMapFromGrid(input);
+
+  const nextMap = generateCells(firstMap);
+
+  const output = generateGridFromMap(nextMap, input[0].length, input.length);
 
   let y = 0;
   while (y < input.length) {
@@ -115,7 +179,11 @@ test("when a cell is false and has three true neighbors it should become true", 
     [false, false, false, false, false, false],
   ];
 
-  const output = generateCells(input);
+  const firstMap = generateFirstMapFromGrid(input);
+
+  const nextMap = generateCells(firstMap);
+
+  const output = generateGridFromMap(nextMap, input[0].length, input.length);
 
   let y = 0;
   while (y < input.length) {
@@ -147,7 +215,11 @@ test("works for a rectangular grid of arbitrary size", () => {
     [false, false, false, false, false, false, false],
   ];
 
-  const output = generateCells(input);
+  const firstMap = generateFirstMapFromGrid(input);
+
+  const nextMap = generateCells(firstMap);
+
+  const output = generateGridFromMap(nextMap, input[0].length, input.length);
 
   let y = 0;
   while (y < input.length) {

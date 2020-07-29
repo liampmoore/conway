@@ -1,5 +1,5 @@
 function checkCell(currentMap, y, ySize, x, xSize, nextMap, deadMap) {
-  cellKey = str(y) + str(x);
+  const cellKey = String(y) + String(x);
   // Check if the current cell is in the nextMap already, if so return
   if (nextMap.has(cellKey)) {
     return;
@@ -14,17 +14,17 @@ function checkCell(currentMap, y, ySize, x, xSize, nextMap, deadMap) {
   if (y > 0) {
     if (x > 0) {
       // Top left
-      if (currentMap.has(str(y - 1) + str(x - 1))) {
+      if (currentMap.has(String(y - 1) + String(x - 1))) {
         livingNeighbors++;
       }
     }
     // Top
-    if (currentMap.has(str(y - 1) + str(x))) {
+    if (currentMap.has(String(y - 1) + String(x))) {
       livingNeighbors++;
     }
     if (x < xSize - 1) {
       // Top right
-      if (currentMap.has(str(y - 1) + str(x + 1))) {
+      if (currentMap.has(String(y - 1) + String(x + 1))) {
         livingNeighbors++;
       }
     }
@@ -32,14 +32,14 @@ function checkCell(currentMap, y, ySize, x, xSize, nextMap, deadMap) {
   // Check the middle left neighbor if the cell isn't on the leftmost side of the screen
   if (x > 0) {
     // Left
-    if (currentMap.has(str(y) + str(x - 1))) {
+    if (currentMap.has(String(y) + String(x - 1))) {
       livingNeighbors++;
     }
   }
   // Check the middle right neighbor if the cell isn't on the rightmost side of the screen
   if (x < xSize - 1) {
     // Right
-    if (currentMap.has(str(y) + str(x + 1))) {
+    if (currentMap.has(String(y) + String(x + 1))) {
       livingNeighbors++;
     }
   }
@@ -47,17 +47,17 @@ function checkCell(currentMap, y, ySize, x, xSize, nextMap, deadMap) {
   if (y < ySize - 1) {
     if (x > 0) {
       // Bottom left
-      if (currentMap.has(str(y + 1) + str(x - 1))) {
+      if (currentMap.has(String(y + 1) + String(x - 1))) {
         livingNeighbors++;
       }
     }
     // Bottom
-    if (currentMap.has(str(y + 1) + str(x))) {
+    if (currentMap.has(String(y + 1) + String(x))) {
       livingNeighbors++;
     }
     if (x < xSize - 1) {
       // Bottom right
-      if (currentMap.has(str(y + 1) + str(x + 1))) {
+      if (currentMap.has(String(y + 1) + String(x + 1))) {
         livingNeighbors++;
       }
     }
@@ -73,17 +73,12 @@ function checkCell(currentMap, y, ySize, x, xSize, nextMap, deadMap) {
 }
 
 function generateCells(currentMap, xSize, ySize) {
-  if (!input[0].length) {
-    console.log(typeof input[0]);
-    throw new Error("inputGrid is not properly formatted.");
-  }
-
   // We create two maps. One map will be the map of cells that will be alive for the next frame.
   // The other map is a map of cells that will NOT be alive for the next frame.
   // By saving cells that won't be in the next frame in the context of this function,
   // we won't have to run the entire check function on them if we run into them again.
-  nextMap = new Map();
-  deadMap = new Map();
+  const nextMap = new Map();
+  const deadMap = new Map();
 
   // Iterate through the old map, this will loop through every alive cell in the current frame.
   for (let [key, cell] of currentMap) {
@@ -162,6 +157,34 @@ function generateCells(currentMap, xSize, ySize) {
   }
 
   return nextMap;
+}
+
+export function generateFirstMapFromGrid(grid) {
+  const firstMap = new Map();
+  for (let y = 0; y < grid.length; y++) {
+    for (let x = 0; x < grid[0].length; x++) {
+      if (grid[y][x]) {
+        firstMap.set(String(y) + String(x), { y: y, x: x });
+      }
+    }
+  }
+  return firstMap;
+}
+
+export function generateGridFromMap(map, xSize, ySize) {
+  let grid = new Array(ySize);
+  for (let y = 0; y < ySize; y++) {
+    const subgrid = new Array(xSize);
+    for (let x = 0; x < xSize; x++) {
+      subgrid[x] = false;
+    }
+    grid[y] = subgrid;
+  }
+
+  for (let [key, value] of map) {
+    grid[value.y][value.x] = true;
+  }
+  return grid;
 }
 
 export default generateCells;
