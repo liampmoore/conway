@@ -17,8 +17,8 @@ function Playbutton({ isPlaying, setIsPlaying }) {
     <Button onClick={() => setIsPlaying(!isPlaying)}>
       {isPlaying ? (
         <svg
-          width={"10vh"}
-          height="10vh"
+          width={"5vh"}
+          height="5vh"
           viewBox="0 0 324 370"
           fill="none"
           xmlns="http://www.w3.org/2000/svg"
@@ -33,8 +33,8 @@ function Playbutton({ isPlaying, setIsPlaying }) {
         </svg>
       ) : (
         <svg
-          width={"10vh"}
-          height={"10vh"}
+          width={"5vh"}
+          height={"5vh"}
           viewBox={`0 0 324 370`}
           fill="none"
           xmlns="http://www.w3.org/2000/svg"

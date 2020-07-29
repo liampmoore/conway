@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import Playbutton from "./Playbutton.js";
+import TemplatePicker from "./TemplatePicker.js";
 
 const BottomBarWrapper = styled.div`
   position: absolute;
@@ -8,30 +9,33 @@ const BottomBarWrapper = styled.div`
   bottom: 0;
   left: 0;
   right: 0;
-  padding: 2.5vh;
+  padding: 1.25vh;
   z-index: 4;
   display: flex;
-  align-items: flex-end;
+  align-items: flex-start;
 `;
-const BottomBar = styled.div`
+const ControlBar = styled.div`
   width: 100%;
   box-sizing: border-box;
-  background-color: grey;
+  background-color: #efefef;
   border-radius: 0.5rem;
   display: flex;
-  justify-content: space-around;
-  padding: 2.5vh;
+  justify-content: space-evenly;
+  align-items: center;
+  padding: 1.25vh;
+  border: 1px solid blue;
 `;
 
 function InterfacePanel({ isPlaying, setIsPlaying }) {
   return (
     <BottomBarWrapper>
-      <BottomBar>
+      <ControlBar>
         <Playbutton
           isPlaying={isPlaying}
           setIsPlaying={setIsPlaying}
         ></Playbutton>
-      </BottomBar>
+        <TemplatePicker />
+      </ControlBar>
     </BottomBarWrapper>
   );
 }
