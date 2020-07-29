@@ -26,7 +26,7 @@ const ControlBar = styled.div`
   border: 1px solid blue;
 `;
 
-function InterfacePanel({ isPlaying, setIsPlaying }) {
+function InterfacePanel({ isPlaying, setIsPlaying, setCurrentTemplate }) {
   return (
     <BottomBarWrapper>
       <ControlBar>
@@ -34,7 +34,7 @@ function InterfacePanel({ isPlaying, setIsPlaying }) {
           isPlaying={isPlaying}
           setIsPlaying={setIsPlaying}
         ></Playbutton>
-        <TemplatePicker />
+        <TemplatePicker setCurrentTemplate={setCurrentTemplate} />
       </ControlBar>
     </BottomBarWrapper>
   );
