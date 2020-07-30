@@ -17,17 +17,8 @@ const AppContainer = styled.div`
 
 function App() {
   const [isPlaying, setIsPlaying] = useState(false);
-  const [cellMap, setCellMap] = useState({
-    0: { y: 0, x: 0 },
-  });
+  const [cellMap, setCellMap] = useState({});
 
-  useEffect(() => {
-    const object = {};
-    for (let i = 0; i < 25; i++) {
-      object[i] = { y: i, x: i };
-    }
-    setCellMap(object);
-  }, []);
   return (
     <>
       <AppContainer>

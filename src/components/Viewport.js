@@ -17,7 +17,11 @@ export default function Viewport({ isPlaying, cellMap, setCellMap }) {
       <Canvas width={"400px"} height={"400px"}>
         <ambientLight />
         <pointLight position={[10, 10, 10]} />
-        <Cellgrid cellMap={cellMap} setCellMap={setCellMap} />
+        <Cellgrid
+          cellMap={cellMap}
+          setCellMap={setCellMap}
+          isPlaying={isPlaying}
+        />
       </Canvas>
     </ViewportContainer>
   );

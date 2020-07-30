@@ -14,7 +14,6 @@ test("can generate a map from an array of arrays", () => {
   ];
 
   const output = generateFirstMapFromGrid(input);
-  console.log(output);
 
   expect(output[203].y).toBe(2);
   expect(output[203].x).toBe(3);

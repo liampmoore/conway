@@ -1,5 +1,5 @@
 const hashFunction = (y, x) => {
-  return y * 100 + x;
+  return String(y * 100 + x);
 };
 
 function checkCell(currentMap, y, ySize, x, xSize, nextMap, deadMap) {
@@ -169,17 +169,6 @@ function generateCells(currentMap, xSize, ySize) {
     }
   }
   return nextMap;
-}
-
-export function toggleCell(y, x, currentMap) {
-  const key = hashFunction(y, x);
-  if (currentMap.hasOwnProperty(key)) {
-    delete currentMap[key];
-    return currentMap;
-  } else {
-    currentMap[key] = { y: y, x: x };
-    return currentMap;
-  }
 }
 
 export function generateFirstMapFromGrid(grid) {
