@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import Playbutton from "./Playbutton.js";
-import TemplatePicker from "./TemplatePicker.js";
+// import TemplatePicker from "./TemplatePicker.js";
 
 const ControlBar = styled.div`
   box-sizing: border-box;
@@ -22,7 +22,6 @@ function Controls({ isPlaying, setIsPlaying, setCurrentTemplate }) {
         isPlaying={isPlaying}
         setIsPlaying={setIsPlaying}
       ></Playbutton>
-      <TemplatePicker setCurrentTemplate={setCurrentTemplate} />
     </ControlBar>
   );
 }

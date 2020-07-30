@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import Controls from "./components/controls/Controls.js";
 import Viewport from "./components/Viewport.js";
@@ -17,16 +17,13 @@ const AppContainer = styled.div`
 
 function App() {
   const [isPlaying, setIsPlaying] = useState(false);
-  const [currentTemplate, setCurrentTemplate] = useState();
+  const [cellMap, setCellMap] = useState({ 23: { y: 2, x: 3 } });
+
   return (
     <>
       <AppContainer>
-        <Controls
-          isPlaying={isPlaying}
-          setIsPlaying={setIsPlaying}
-          setCurrentTemplate={setCurrentTemplate}
-        />
-        <Viewport isPlaying={isPlaying} />
+        <Controls isPlaying={isPlaying} setIsPlaying={setIsPlaying} />
+        <Viewport isPlaying={isPlaying} cellMap={cellMap} />
       </AppContainer>
     </>
   );

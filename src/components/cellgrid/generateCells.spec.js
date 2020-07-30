@@ -14,31 +14,30 @@ test("can generate a map from an array of arrays", () => {
   ];
 
   const output = generateFirstMapFromGrid(input);
+  console.log(output);
 
-  expect(output.get(23).y).toBe(2);
-  expect(output.get(23).x).toBe(3);
-  expect(output.get(32).y).toBe(3);
-  expect(output.get(32).x).toBe(2);
-  expect(output.get(41).y).toBe(4);
-  expect(output.get(41).x).toBe(1);
+  expect(output[203].y).toBe(2);
+  expect(output[203].x).toBe(3);
+  expect(output[302].y).toBe(3);
+  expect(output[302].x).toBe(2);
+  expect(output[401].y).toBe(4);
+  expect(output[401].x).toBe(1);
 });
 
 test("can generate an array of arrays from a map", () => {
-  const input = new Map();
-  input.set(23, { y: 2, x: 3 });
+  const input = {};
+  input[23] = { y: 2, x: 3 };
 
   const output = generateGridFromMap(input, 6, 6);
 
   const expectedOutput = [
     [false, false, false, false, false, false],
     [false, false, false, false, false, false],
-    [false, false, false, false, false, false],
+    [false, false, false, true, false, false],
     [false, false, false, false, false, false],
     [false, false, false, false, false, false],
     [false, false, false, false, false, false],
   ];
-
-  expectedOutput[2][3] = true;
 
   let y = 0;
   while (y < 6) {
@@ -110,7 +109,6 @@ test("when a cell is true with two true neighbors it should remain true", () => 
   const firstMap = generateFirstMapFromGrid(input);
 
   const nextMap = generateCells(firstMap, 6, 6);
-
   const output = generateGridFromMap(nextMap, 6, 6);
 
   let y = 0;
