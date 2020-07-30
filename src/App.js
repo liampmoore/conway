@@ -1,38 +1,33 @@
-import React, { useState, useRef } from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
-import InterfacePanel from "./components/InterfacePanel.js";
+import Controls from "./components/controls/Controls.js";
+import Viewport from "./components/Viewport.js";
+import "./app.css";
 
-const Viewport = styled.div`
-  position: absolute;
-  bottom: 0;
-  background-color: red;
+const AppContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 0 auto;
+  padding: 0;
+  max-width: 400px;
+  height: 100%;
 `;
 
-// Notes: The interface panel uses a total of 10vh of the screen.
 function App() {
-  let canvasRef = useRef();
   const [isPlaying, setIsPlaying] = useState(false);
   const [currentTemplate, setCurrentTemplate] = useState();
-  const [ySize, setySize] = useState(0);
-  const [xSize, setxSize] = useState(0);
   return (
     <>
-      <InterfacePanel
-        isPlaying={isPlaying}
-        setIsPlaying={setIsPlaying}
-        setCurrentTemplate={setCurrentTemplate}
-      />
-      <Viewport>
-        <canvas
-          ref={canvasRef}
-          height={window.innerHeight * 0.875}
-          width={window.innerWidth}
-          position="absolute"
-          bottom="0"
-          left="0"
-          right="0"
+      <AppContainer>
+        <Controls
+          isPlaying={isPlaying}
+          setIsPlaying={setIsPlaying}
+          setCurrentTemplate={setCurrentTemplate}
         />
-      </Viewport>
+        <Viewport isPlaying={isPlaying} />
+      </AppContainer>
     </>
   );
 }

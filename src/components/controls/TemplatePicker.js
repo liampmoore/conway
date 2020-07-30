@@ -7,7 +7,7 @@ function TemplatePicker({ setCurrentTemplate }) {
   const templates = { Glider, Star };
   return (
     <Dropdown
-      placeholder="Set a template."
+      placeholder="Set template."
       onSelect={(e) => setCurrentTemplate(templates[e])}
     >
       <option value="Glider">Glider</option>
