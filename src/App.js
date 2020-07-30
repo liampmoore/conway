@@ -17,13 +17,26 @@ const AppContainer = styled.div`
 
 function App() {
   const [isPlaying, setIsPlaying] = useState(false);
-  const [cellMap, setCellMap] = useState({ 23: { y: 2, x: 3 } });
+  const [cellMap, setCellMap] = useState({
+    0: { y: 0, x: 0 },
+  });
 
+  useEffect(() => {
+    const object = {};
+    for (let i = 0; i < 25; i++) {
+      object[i] = { y: i, x: i };
+    }
+    setCellMap(object);
+  }, []);
   return (
     <>
       <AppContainer>
         <Controls isPlaying={isPlaying} setIsPlaying={setIsPlaying} />
-        <Viewport isPlaying={isPlaying} cellMap={cellMap} />
+        <Viewport
+          isPlaying={isPlaying}
+          cellMap={cellMap}
+          setCellMap={setCellMap}
+        />
       </AppContainer>
     </>
   );

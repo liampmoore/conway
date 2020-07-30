@@ -1,11 +1,11 @@
+const hashFunction = (y, x) => {
+  return y * 100 + x;
+};
+
 function checkCell(currentMap, y, ySize, x, xSize, nextMap, deadMap) {
   // This hash function is specifically tuned to a maximum of a 100 x 100 grid
   // The y value is multiplied by 100, ensuring that it's digits will never overlap with x,
   // since x is a number from 0 99
-
-  const hashFunction = (y, x) => {
-    return y * 100 + x;
-  };
 
   const cellKey = hashFunction(y, x);
   // Check if the current cell is in the nextMap already, if so return
@@ -169,6 +169,17 @@ function generateCells(currentMap, xSize, ySize) {
     }
   }
   return nextMap;
+}
+
+export function toggleCell(y, x, currentMap) {
+  const key = hashFunction(y, x);
+  if (currentMap.hasOwnProperty(key)) {
+    delete currentMap[key];
+    return currentMap;
+  } else {
+    currentMap[key] = { y: y, x: x };
+    return currentMap;
+  }
 }
 
 export function generateFirstMapFromGrid(grid) {
