@@ -27,9 +27,9 @@ function Playbutton({ isPlaying, setIsPlaying }) {
           <path
             d="M30 323V30M281 30V323"
             stroke="#E19191"
-            stroke-width="59"
-            stroke-linecap="round"
-            stroke-linejoin="bevel"
+            strokeWidth="59"
+            strokeLinecap="round"
+            strokeLinejoin="bevel"
           />
         </svg>
       ) : (
