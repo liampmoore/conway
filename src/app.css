@@ -1,8 +1,14 @@
+/* Ensures our app wrapper is proper height, 100% of viewport. */
 html,
 body {
   height: 100%;
 }
-
 #root {
   height: 100%;
+}
+
+/* Keeps our canvas at a consistent and predictable 400px */
+canvas {
+  height: 400px;
+  width: 400px;
 }
