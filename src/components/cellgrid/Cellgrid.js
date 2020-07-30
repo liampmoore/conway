@@ -28,21 +28,26 @@ function Cell(props) {
 
 export default function Cellgrid({ cellMap }) {
   const size = 0.74;
+  const { mouse } = useThree();
 
   return (
     <>
-      (
-      {Object.values(cellMap).map((item) => (
-        <Cell
-          key={item.y * 10 + item.x}
-          position={[
-            -7.673269879789604 / 2 + 0.5 + item.x * size,
-            7.673269879789604 / 2 - 0.5 - item.y * size,
-            0,
-          ]}
-        />
-      ))}
-      )
+      <group onClick={(e) => console.log(mouse)}>
+        <mesh>
+          <planeBufferGeometry attach="geometry" args={[50, 50, 50]} />
+        </mesh>
+        {Object.values(cellMap).map((item) => (
+          <Cell
+            key={item.y * 10 + item.x}
+            position={[
+              -7.673269879789604 / 2 + 0.5 + item.x * size,
+              7.673269879789604 / 2 - 0.5 - item.y * size,
+              0,
+            ]}
+          />
+        ))}
+        )
+      </group>
     </>
   );
 }
