@@ -11,4 +11,7 @@ body {
 canvas {
   height: 400px;
   width: 400px;
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
+  overflow: hidden;
 }
