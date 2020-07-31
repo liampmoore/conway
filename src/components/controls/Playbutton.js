@@ -13,6 +13,9 @@ const Button = styled.button`
   :focus {
     outline: none;
   }
+  :hover {
+    cursor: pointer;
+  }
 `;
 function Playbutton({ isPlaying, setIsPlaying }) {
   return (
