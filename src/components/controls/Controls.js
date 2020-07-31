@@ -40,6 +40,8 @@ function Controls({
   setCellMap,
   generation,
   setGeneration,
+  speed,
+  setSpeed,
 }) {
   return (
     <ControlBar>
@@ -53,11 +55,14 @@ function Controls({
         setCellMap={setCellMap}
         generation={generation}
         setGeneration={setGeneration}
+        speed={speed}
+        setSpeed={setSpeed}
       />
       <Clearbutton
         setCellMap={setCellMap}
         setIsPlaying={setIsPlaying}
         setGeneration={setGeneration}
+        setSpeed={setSpeed}
       />
       <Counter>{generation}</Counter>
     </ControlBar>

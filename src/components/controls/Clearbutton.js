@@ -18,11 +18,13 @@ export default function Clearbutton({
   setIsPlaying,
   setCellMap,
   setGeneration,
+  setSpeed,
 }) {
   const handleClick = () => {
     setIsPlaying(false);
     setCellMap({});
     setGeneration(0);
+    setSpeed(0);
   };
   return (
     <Button onClick={() => handleClick()}>

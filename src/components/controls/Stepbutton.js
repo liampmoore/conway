@@ -20,12 +20,24 @@ export default function Stepbutton({
   setGeneration,
   cellMap,
   setCellMap,
+  speed,
+  setSpeed,
 }) {
   const handleClick = () => {
     if (!isPlaying && cellMap) {
       const newMap = generateCells(cellMap);
       setCellMap(newMap);
       setGeneration(generation + 1);
+    } else {
+      if (speed === 0) {
+        setSpeed(5);
+      } else if (speed === 5) {
+        setSpeed(8);
+      } else if (speed === 8) {
+        setSpeed(9);
+      } else {
+        setSpeed(0);
+      }
     }
   };
   return (
