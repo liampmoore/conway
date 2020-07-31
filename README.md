@@ -14,13 +14,7 @@ You can check out a pretty good tutorial here: https://tutorial.djangogirls.org/
 You'll need Node.js installed on your machine in order to set up your development environment. See instructions here:
 https://nodejs.org/en/download/
 
-You'll need the Git CLI to make changes to the repository. Follow the instructions here: https://git-scm.com/book/en/v2/Getting-Started-Installing-Git
-
-Make sure you have a github account if you want to contribute to the repository. To contribute you'll need to configure your git CLI settings with your username and email.
-```
-$ git config --global user.name "John Doe"
-$ git config --global user.email johndoe@example.com
-```
+You'll need the Git CLI to clone and make changes to the repository. Follow the instructions here: https://git-scm.com/book/en/v2/Getting-Started-Installing-Git
 
 You'll also need Yarn to install the dependencies required for this project:
 https://classic.yarnpkg.com/en/docs/install/
@@ -74,6 +68,11 @@ https://vercel.com/solutions/react
 * [React Three Fiber](https://github.com/react-spring/react-three-fiber) - A Three.js renderer that allows you to compose scenes as React components
 
 ## Contributing
+Make sure you have a github account if you want to contribute to the repository. To contribute you'll need to configure your git CLI settings with your username and email.
+```
+$ git config --global user.name "John Doe"
+$ git config --global user.email johndoe@example.com
+```
 
 If you want to add something to this repo, get a good idea of what you are going to add, make your changes locally, save them, run the tests included, commit to your version of the repository. To commit, cd into the project directory and type:
 ```
