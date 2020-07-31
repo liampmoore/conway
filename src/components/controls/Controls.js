@@ -7,12 +7,13 @@ import Clearbutton from "./Clearbutton";
 
 const ControlBar = styled.div`
   box-sizing: border-box;
-  border-radius: 0.5rem;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
   display: flex;
   justify-content: space-evenly;
   align-items: center;
   padding: 1rem 1.25rem;
-  border: 1px solid blue;
+  border: 0.5px solid #bcc4e3;
   width: 100%;
   margin: 0;
 `;
@@ -31,8 +32,8 @@ const Counter = styled.p`
   line-height: 0rem;
   position: relative;
   bottom: 0.16rem;
+  pointer-events: none;
 `;
-
 function Controls({
   isPlaying,
   setIsPlaying,

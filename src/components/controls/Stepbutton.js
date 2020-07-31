@@ -12,6 +12,7 @@ const Button = styled.button`
   padding: none;
   margin: none;
   :focus {
+    outline: none;
   }
 `;
 export default function Stepbutton({

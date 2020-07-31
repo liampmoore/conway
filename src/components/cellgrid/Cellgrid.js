@@ -32,6 +32,24 @@ function Cell(props) {
   // Set up state for the hovered and active state
   const [hovered, setHover] = useState(false);
 
+  useFrame(() => {
+    if (mesh.current.scale.z === 0) {
+      if (mesh.current.scale.y < 1.4) {
+        mesh.current.scale.y += 0.001;
+        mesh.current.scale.x += 0.001;
+      } else {
+        mesh.current.scale.z = 1;
+      }
+    } else {
+      if (mesh.current.scale.y > 1) {
+        mesh.current.scale.y -= 0.001;
+        mesh.current.scale.x -= 0.001;
+      } else {
+        mesh.current.scale.z = 0;
+      }
+    }
+  });
+
   return (
     <mesh
       {...props}
