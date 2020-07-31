@@ -25,7 +25,7 @@ $ git config --global user.email johndoe@example.com
 You'll also need Yarn to install the dependencies required for this project:
 https://classic.yarnpkg.com/en/docs/install/
 
-You'll need some sort of text editor to edit the code. I use VSCode:thttps://tutorial.djangogirls.org/en/intro_to_command_line/
+You'll need some sort of text editor to edit the code. I use VSCode:
 https://code.visualstudio.com/
 
 ### Installing
