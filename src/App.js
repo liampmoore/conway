@@ -41,12 +41,16 @@ function App() {
   const [isPlaying, setIsPlaying] = useState(false);
   const [cellMap, setCellMap] = useState({});
   const [generation, setGeneration] = useState(0);
-  const [speed, setSpeed] = useState(1);
+  const [speed, setSpeed] = useState(0);
 
   useInterval(() => {
-    const nextMap = generateCells(cellMap);
-    setGeneration(generation + 1);
-    setCellMap(nextMap);
+    if (Object.keys(cellMap).length !== 0) {
+      const nextMap = generateCells(cellMap);
+      setGeneration(generation + 1);
+      setCellMap(nextMap);
+    } else {
+      setIsPlaying(false);
+    }
   }, (1000 - speed * 100 - speed * 10) * isPlaying);
 
   return (

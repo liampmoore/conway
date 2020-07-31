@@ -27,7 +27,7 @@ function Playbutton({ isPlaying, setIsPlaying }) {
         >
           <path
             d="M30 323V30M281 30V323"
-            stroke="#E19191"
+            stroke="#FFAAFF"
             strokeWidth="59"
             strokeLinecap="round"
             strokeLinejoin="bevel"
