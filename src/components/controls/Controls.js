@@ -14,6 +14,7 @@ const ControlBar = styled.div`
   align-items: center;
   padding: 1rem 1.25rem;
   border: 0.5px solid #bcc4e3;
+  border-bottom: none;
   width: 100%;
   margin: 0;
 `;
