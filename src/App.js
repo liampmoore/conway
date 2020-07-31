@@ -68,6 +68,7 @@ function App() {
         />
         <Viewport
           isPlaying={isPlaying}
+          setIsPlaying={setIsPlaying}
           cellMap={cellMap}
           setCellMap={setCellMap}
         />
