@@ -18,11 +18,19 @@ const AppContainer = styled.div`
 function App() {
   const [isPlaying, setIsPlaying] = useState(false);
   const [cellMap, setCellMap] = useState({});
+  const [generation, setGeneration] = useState(0);
 
   return (
     <>
       <AppContainer>
-        <Controls isPlaying={isPlaying} setIsPlaying={setIsPlaying} />
+        <Controls
+          isPlaying={isPlaying}
+          setIsPlaying={setIsPlaying}
+          cellMap={cellMap}
+          setCellMap={setCellMap}
+          generation={generation}
+          setGeneration={setGeneration}
+        />
         <Viewport
           isPlaying={isPlaying}
           cellMap={cellMap}

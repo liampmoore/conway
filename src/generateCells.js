@@ -85,7 +85,10 @@ function checkCell(currentMap, y, ySize, x, xSize, nextMap, deadMap) {
   }
 }
 
-function generateCells(currentMap, xSize, ySize) {
+function generateCells(currentMap) {
+  const xSize = 25;
+  const ySize = 25;
+
   // We create two maps. One map will be the map of cells that will be alive for the next frame.
   // The other map is a map of cells that will NOT be alive for the next frame.
   // By saving cells that won't be in the next frame in the context of this function,
