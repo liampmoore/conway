@@ -22,11 +22,11 @@ const TitleScreen = styled.div`
   position: absolute;
   z-index: 100;
   width: 100%;
-  top: 20%;
+  top: 24%;
 `;
 
 const Title = styled.h1`
-  font-size: 1.2rem;
+  font-size: 1.1rem;
   text-align: center;
   font-family: "Mulish", sans-serif;
 `;
@@ -34,7 +34,7 @@ const Title = styled.h1`
 const Link = styled.a`
   color: black;
   text-decoration: none;
-  display: block;
+  display: inline;
   :active {
     color: #ffaaff;
     text-decoration: underline;
@@ -58,7 +58,7 @@ const ImgLink = styled.a`
 `;
 
 const Description = styled.p`
-  font-size: 1rem;
+  font-size: 0.94rem;
   width: 100%;
   text-align: center;
   font-family: "Mulish", sans-serif;
