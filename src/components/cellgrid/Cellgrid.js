@@ -1,5 +1,5 @@
-import React, { useState, useEffect, useRef } from "react";
-import { Canvas, useFrame, useThree } from "react-three-fiber";
+import React, { useState, useRef } from "react";
+import { useFrame, useThree } from "react-three-fiber";
 
 const hashFunction = (y, x) => {
   return String(y * 100 + x);

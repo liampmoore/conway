@@ -1,10 +1,8 @@
-import React, { useState, useRef, useEffect } from "react";
+import React from "react";
 import styled from "styled-components";
-import { Canvas, useThree } from "react-three-fiber";
+import { Canvas } from "react-three-fiber";
 
 import Cellgrid from "./cellgrid/Cellgrid.js";
-
-const radians = (degrees) => (degrees * Math.PI) / 180;
 
 const ViewportContainer = styled.div`
   position: relative;
