@@ -29,21 +29,19 @@ function Cell(props) {
   // This reference will give us direct access to the mesh
   const mesh = useRef();
 
-  // Set up state for the hovered and active state
-  const [hovered, setHover] = useState(false);
 
   useFrame(() => {
     if (mesh.current.scale.z === 0) {
-      if (mesh.current.scale.y < 1.4) {
-        mesh.current.scale.y += 0.001;
-        mesh.current.scale.x += 0.001;
+      if (mesh.current.scale.y < 1.25) {
+        mesh.current.scale.y += 0.0005;
+        mesh.current.scale.x += 0.0005;
       } else {
         mesh.current.scale.z = 1;
       }
     } else {
       if (mesh.current.scale.y > 1) {
-        mesh.current.scale.y -= 0.001;
-        mesh.current.scale.x -= 0.001;
+        mesh.current.scale.y -= 0.00075;
+        mesh.current.scale.x -= 0.00075;
       } else {
         mesh.current.scale.z = 0;
       }
@@ -54,13 +52,11 @@ function Cell(props) {
     <mesh
       {...props}
       ref={mesh}
-      onPointerOver={(e) => setHover(true)}
-      onPointerOut={(e) => setHover(false)}
     >
       <planeBufferGeometry attach="geometry" args={[0.3, 0.3, 0]} />
       <meshStandardMaterial
         attach="material"
-        color={hovered ? "black" : "hotpink"}
+        color={"black"}
       />
     </mesh>
   );
