@@ -32,7 +32,7 @@ export default function Clearbutton({
     setSpeed(0);
   };
   return (
-    <Button onClick={() => handleClick()}>
+    <Button alt="Stop and clear all cells." aria-label="Stop and clear all cells." onClick={() => handleClick()}>
       <svg
         width={"5vh"}
         height={"4vh"}

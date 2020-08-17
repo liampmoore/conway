@@ -46,7 +46,7 @@ export default function Stepbutton({
     }
   };
   return (
-    <Button onClick={() => handleClick()}>
+    <Button alt={isPlaying ? "Speed up generations.":"Step forward one generation."} aria-label={isPlaying ? "Speed up generations.":"Step forward one generation."}  onClick={() => handleClick()}>
       <svg
         width={"5vh"}
         height={"4vh"}

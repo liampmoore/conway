@@ -19,12 +19,15 @@ const Button = styled.button`
   }
 `;
 function Playbutton({ isPlaying, setIsPlaying }) {
+    function handleClick(e) {
+        setIsPlaying(!isPlaying)
+    }
   return (
-    <Button onClick={() => setIsPlaying(!isPlaying)}>
+    <Button alt={isPlaying ? "Pause.":"Play."} aria-label={isPlaying ? "Pause.":"Play."} onClick={(e) => handleClick(e)}>
       {isPlaying ? (
         <svg
           width={"5vh"}
-          height="5vh"
+          height="4vh"
           viewBox="0 0 324 370"
           fill="none"
           xmlns="http://www.w3.org/2000/svg"
