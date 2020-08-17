@@ -8,10 +8,11 @@ const Button = styled.button`
   -moz-box-shadow: none;
   box-shadow: none;
   border: none;
-  padding: none;
+  padding: .8rem .4rem;
   margin: none;
   :focus {
-    outline: none;
+    border: 1px solid black;
+    border-radius: 5px;
   }
   :hover {
     cursor: pointer;
@@ -34,7 +35,7 @@ export default function Clearbutton({
     <Button onClick={() => handleClick()}>
       <svg
         width={"5vh"}
-        height={"5vh"}
+        height={"4vh"}
         viewBox={`0 0 324 370`}
         fill="none"
         xmlns="http://www.w3.org/2000/svg"

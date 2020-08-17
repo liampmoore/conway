@@ -28,7 +28,7 @@ const Counter = styled.p`
   border: none;
   padding: none;
   margin: none;
-  font-size: 2.6rem;
+  font-size: 3.22rem;
   font-family: "Mulish", sans-serif;
   line-height: 0rem;
   position: relative;
