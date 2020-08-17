@@ -9,7 +9,7 @@ const Button = styled.button`
   -moz-box-shadow: none;
   box-shadow: none;
   border: none;
-  padding: .8rem .4rem;
+  padding: .62rem .24rem;
   margin: none;
   :focus {
     border: 1px solid black;

@@ -3,12 +3,13 @@ import styled from "styled-components";
 
 const Button = styled.button`
   display: block;
+  box-sizing: border-box;
   background-color: transparent;
   -webkit-box-shadow: none;
   -moz-box-shadow: none;
   box-shadow: none;
   border: none;
-  padding: .8rem .4rem;
+  padding: .62rem .24rem;
   margin: none;
   :focus {
     border: 1px solid black;
